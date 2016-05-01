@@ -2,6 +2,8 @@ defmodule Insights.User do
   use Insights.Web, :model
   alias Passport.Password
 
+  @primary_key {:id, Ecto.UUID, autogenerate: true}
+
   schema "users" do
     field :first_name, :string
     field :last_name, :string
@@ -20,6 +22,7 @@ defmodule Insights.User do
   def changeset(model, params \\ :empty) do model
     |> cast(params, @required_fields, @optional_fields)
     |> validate_length(:email, min: 1, max: 150)
+    |> validate_format(:email, ~r/.+@.+/)
     |> unique_constraint(:email)
     |> unique_constraint(:username)
   end
@@ -27,7 +30,6 @@ defmodule Insights.User do
   def registration_changeset(model, params) do model
     |> changeset(params)
     |> cast(params, ~w(password), [])
-    |> validate_length(:password, min: 6, max: 100)
     |> put_hashed_password()
   end
 
