@@ -17,6 +17,11 @@ defmodule Insights.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+
+    resources "/users", UserController, param: "username" do
+      resources "/insights", InsightController, param: "username", only: [:index]
+    end
+    resources "/insights", InsightController
   end
 
   # Other scopes may use custom stacks.

@@ -1,0 +1,6 @@
+<h2>Edit insight</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: insight_path(@conn, :update, @insight) %>
+
+<%= link "Back", to: insight_path(@conn, :index) %>
