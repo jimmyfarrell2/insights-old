@@ -1,0 +1,33 @@
+<h2>Show insight</h2>
+
+<ul>
+
+  <li>
+    <strong>Author:</strong>
+    <%= @insight.author.username %>
+  </li>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @insight.title %>
+  </li>
+
+  <li>
+    <strong>Current Version:</strong>
+    <%= @insight.current_version %>
+  </li>
+
+  <li>
+    <strong>Created:</strong>
+    <%= @insight.inserted_at %>
+  </li>
+
+  <li>
+    <strong>Last Updated:</strong>
+    <%= @insight.updated_at %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: insight_path(@conn, :edit, @insight) %>
+<%= link "Back", to: insight_path(@conn, :index) %>
