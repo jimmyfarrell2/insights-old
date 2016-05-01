@@ -27,3 +27,8 @@ import_config "#{Mix.env}.exs"
 config :phoenix, :generators,
   migration: true,
   binary_id: false
+
+# Configure passport authentication
+config :passport,
+  resource: Insights.User,
+  repo: Insights.Repo
