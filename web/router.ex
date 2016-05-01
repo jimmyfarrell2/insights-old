@@ -28,7 +28,7 @@ defmodule Insights.Router do
     get "/forget-password", PasswordController, :forget_password
     post "/reset-password", PasswordController, :reset_password
 
-    resources "/users", UserController, param: "username" do
+    resources "/users", UserController, param: "username", except: [:new] do
       resources "/insights", InsightController, param: "username", only: [:index]
     end
 

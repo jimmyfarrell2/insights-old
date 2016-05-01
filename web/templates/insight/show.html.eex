@@ -13,8 +13,23 @@
   </li>
 
   <li>
-    <strong>Current Version:</strong>
-    <%= @insight.current_version %>
+    <strong>Body:</strong>
+    <%= @insight.body %>
+  </li>
+
+  <li>
+    <strong>Category:</strong>
+    <%= @insight.category %>
+  </li>
+
+  <li>
+    <strong>Tags:</strong>
+    <%= Enum.join(@insight.tags, " ") %>
+  </li>
+
+  <li>
+    <strong>Published:</strong>
+    <%= @insight.published_at %>
   </li>
 
   <li>

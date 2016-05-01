@@ -5,6 +5,7 @@ defmodule Insights.InsightController do
   alias Insights.User
 
   plug :scrub_params, "insight" when action in [:create, :update]
+  plug :verify_authorization, "verify authorization" when action in [:new]
 
   def index(conn, %{"user_username" => username}) do
     insights =
@@ -26,11 +27,11 @@ defmodule Insights.InsightController do
 
   def new(conn, _params) do
     changeset = Insight.changeset(%Insight{})
-    render(conn, "new.html", changeset: changeset)
+    render(conn, "new.html", changeset: changeset, categories: categories)
   end
 
   def create(conn, %{"insight" => insight_params}) do
-    %{"author_id" => username} = insight_params
+    username = conn |> Map.get(:assigns) |> Map.get(:current_user) |> Map.get(:username)
     author_id = User |> where(username: ^username) |> Repo.one |> Map.get(:id)
     insight_params = Map.put(insight_params, "author_id", author_id)
     changeset = Insight.changeset(%Insight{}, insight_params)
@@ -41,7 +42,7 @@ defmodule Insights.InsightController do
         |> put_flash(:info, "Insight created successfully.")
         |> redirect(to: insight_path(conn, :index))
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "new.html", changeset: changeset, categories: categories)
     end
   end
 
@@ -80,5 +81,16 @@ defmodule Insights.InsightController do
     conn
     |> put_flash(:info, "Insight deleted successfully.")
     |> redirect(to: insight_path(conn, :index))
+  end
+
+  defp categories do
+    ~w(Education Health/Fitness Technology)
+  end
+
+  defp verify_authorization(%{assigns: %{current_user: current_user}} = conn, _) do
+    case current_user do
+      nil -> conn |> put_flash(:error, "You are not logged in.") |> redirect(to: "/") |> halt
+      _ -> conn
+    end
   end
 end
