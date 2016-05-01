@@ -32,6 +32,7 @@ defmodule Insights.Mixfile do
   defp deps do
     [{:cowboy, "~> 1.0"},
      {:gettext, "~> 0.9"},
+     {:passport, "~> 0.0.4"},
      {:phoenix, "~> 1.1.4"},
      {:phoenix_ecto, "~> 2.0"},
      {:phoenix_html, "~> 2.4"},
