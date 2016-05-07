@@ -9,14 +9,12 @@ defmodule Insights.InsightController do
 
   def index(conn, %{"user_username" => username}) do
     insights =
-      Insight
-      |> Repo.all
+      User
+      |> where(username: ^username)
+      |> preload(:insights)
+      |> Repo.one
+      |> Map.get(:insights)
       |> Repo.preload(:author)
-      |> Enum.filter(fn(insight) ->
-        %{author: %{username: u}} = insight
-        u == username
-      end)
-
     render(conn, "index.html", insights: insights)
   end
 
@@ -31,7 +29,7 @@ defmodule Insights.InsightController do
   end
 
   def create(conn, %{"insight" => insight_params}) do
-    username = conn |> Map.get(:assigns) |> Map.get(:current_user) |> Map.get(:username)
+    %{assigns: %{current_user: %{username: username}}} = conn
     author_id = User |> where(username: ^username) |> Repo.one |> Map.get(:id)
     insight_params = Map.put(insight_params, "author_id", author_id)
     changeset = Insight.changeset(%Insight{}, insight_params)
@@ -54,7 +52,7 @@ defmodule Insights.InsightController do
   def edit(conn, %{"id" => id}) do
     insight = Repo.get!(Insight, id)
     changeset = Insight.changeset(insight)
-    render(conn, "edit.html", insight: insight, changeset: changeset)
+    render(conn, "edit.html", insight: insight, changeset: changeset, categories: categories)
   end
 
   def update(conn, %{"id" => id, "insight" => insight_params}) do

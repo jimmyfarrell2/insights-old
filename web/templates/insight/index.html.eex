@@ -1,6 +1,6 @@
 <h2>Listing insights</h2>
 
-<table class="table">
+<table class="">
   <thead>
     <tr>
       <th>Author</th>
@@ -15,10 +15,10 @@
       <td><%= insight.author.username %></td>
       <td><%= insight.title %></td>
 
-      <td class="text-right">
-        <%= link "Show", to: insight_path(@conn, :show, insight), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: insight_path(@conn, :edit, insight), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: insight_path(@conn, :delete, insight), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      <td class="">
+        <%= link "Show", to: insight_path(@conn, :show, insight), class: "" %>
+        <%= link "Edit", to: insight_path(@conn, :edit, insight), class: "" %>
+        <%= link "Delete", to: insight_path(@conn, :delete, insight), method: :delete, data: [confirm: "Are you sure?"], class: "" %>
       </td>
     </tr>
 <% end %>
