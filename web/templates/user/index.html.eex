@@ -1,6 +1,6 @@
 <h2>Listing users</h2>
 
-<table class="table">
+<table class="">
   <thead>
     <tr>
       <th>First name</th>
@@ -19,10 +19,10 @@
       <td><%= user.username %></td>
       <td><%= user.email %></td>
 
-      <td class="text-right">
-        <%= link "Show", to: user_path(@conn, :show, user.username), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: user_path(@conn, :edit, user.username), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: user_path(@conn, :delete, user.username), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      <td class="">
+        <%= link "Show", to: user_path(@conn, :show, user.username), class: "" %>
+        <%= link "Edit", to: user_path(@conn, :edit, user.username), class: "" %>
+        <%= link "Delete", to: user_path(@conn, :delete, user.username), method: :delete, data: [confirm: "Are you sure?"], class: "" %>
       </td>
     </tr>
 <% end %>
