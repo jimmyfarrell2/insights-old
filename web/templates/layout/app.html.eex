@@ -7,15 +7,15 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hello Insights!</title>
+    <title>Insights - Knowledge. Insights. Passion.</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
   <body>
-    <div class="container">
-      <header class="header">
-        <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
+    <div class="">
+      <header class="">
+        <nav role="">
+          <ul class="">
               <li><a href="/">Home</a></li>
             <%= if @current_user do %>
               <li><a href="/users/<%= @current_user.username %>"><%= @current_user.username %></a></li>
@@ -29,13 +29,13 @@
             <li><a href="/insights/new">New Insight</a></li>
           </ul>
         </nav>
-        <span class="logo"><h1>Insights</h1><h4>Knowledge. Incites. Power.</h4></span>
+        <span class=""><h1>Insights</h1><h4>Knowledge. Insights. Passion.</h4></span>
       </header>
 
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+      <p class="" role="alert"><%= get_flash(@conn, :info) %></p>
+      <p class="" role="alert"><%= get_flash(@conn, :error) %></p>
 
-      <main role="main">
+      <main role="">
         <%= render @view_module, @view_template, assigns %>
       </main>
 

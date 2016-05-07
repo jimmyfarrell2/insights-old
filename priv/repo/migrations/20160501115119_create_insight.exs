@@ -5,7 +5,7 @@ defmodule Insights.Repo.Migrations.CreateInsight do
     create table(:insights, primary_key: false) do
       add :id, :uuid, primary_key: true
       add :title, :string, default: "untitled"
-      add :body, :string
+      add :body, :string, size: 65000
       add :category, :string
       add :tags, {:array, :string}, default: []
       add :published_at, :datetime

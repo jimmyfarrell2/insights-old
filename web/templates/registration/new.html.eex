@@ -1,7 +1,7 @@
 <h1>Register</h1>
 <%= form_for @changeset, registration_path(@conn, :create), fn f -> %>
   <%= if f.errors != [] do %>
-    <div class="alert alert-danger">
+    <div class="">
       <p>Oops, something went wrong!<br> Please check the errors below:</p>
       <ul>
         <%= for {attr, message} <- f.errors do %>
@@ -11,26 +11,26 @@
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= label f, :first_name, class: "control-label" %>
-    <%= text_input f, :first_name, class: "form-control" %>
+  <div class="">
+    <%= label f, :first_name, class: "" %>
+    <%= text_input f, :first_name, class: "" %>
   </div>
-  <div class="form-group">
-    <%= label f, :last_name, class: "control-label" %>
-    <%= text_input f, :last_name, class: "form-control" %>
+  <div class="">
+    <%= label f, :last_name, class: "" %>
+    <%= text_input f, :last_name, class: "" %>
   </div>
-  <div class="form-group">
-    <%= label f, :username, class: "control-label" %>
-    <%= text_input f, :username, class: "form-control" %>
+  <div class="">
+    <%= label f, :username, class: "" %>
+    <%= text_input f, :username, class: "" %>
   </div>
-  <div class="form-group">
-    <%= label f, :email, class: "control-label" %>
-    <%= text_input f, :email, class: "form-control" %>
+  <div class="">
+    <%= label f, :email, class: "" %>
+    <%= text_input f, :email, class: "" %>
   </div>
-  <div class="form-group">
-    <%= label f, :password, class: "control-label" %>
-    <%= password_input f, :password, class: "form-control" %>
+  <div class="">
+    <%= label f, :password, class: "" %>
+    <%= password_input f, :password, class: "" %>
   </div>
 
-  <%= submit "Register", class: "btn btn-primary" %>
+  <%= submit "Register", class: "" %>
 <% end %>

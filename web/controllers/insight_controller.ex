@@ -52,7 +52,7 @@ defmodule Insights.InsightController do
   def edit(conn, %{"id" => id}) do
     insight = Repo.get!(Insight, id)
     changeset = Insight.changeset(insight)
-    render(conn, "edit.html", insight: insight, changeset: changeset)
+    render(conn, "edit.html", insight: insight, changeset: changeset, categories: categories)
   end
 
   def update(conn, %{"id" => id, "insight" => insight_params}) do
