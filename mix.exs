@@ -31,6 +31,7 @@ defmodule Insights.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [{:cowboy, "~> 1.0"},
+     {:earmark, "~> 0.2.1"},
      {:gettext, "~> 0.9"},
      {:passport, "~> 0.0.4"},
      {:phoenix, "~> 1.1.4"},

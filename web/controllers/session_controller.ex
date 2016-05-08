@@ -14,7 +14,6 @@ defmodule Insights.SessionController do
     case Session.login(conn, email, pass) do
     {:ok, conn} ->
       conn
-      |> put_flash(:info, "Welcome back!")
       |> redirect(to: page_path(conn, :index))
     {:error, _reason, conn} ->
       conn

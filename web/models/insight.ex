@@ -15,8 +15,8 @@ defmodule Insights.Insight do
     timestamps
   end
 
-  @required_fields ~w(author_id)
-  @optional_fields ~w(title body category tags published_at)
+  @required_fields ~w(author_id title)
+  @optional_fields ~w(body category tags published_at)
 
   @doc """
   Creates a changeset based on the `model` and `params`.
@@ -27,5 +27,19 @@ defmodule Insights.Insight do
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
+    |> strip_unsafe_body(params)
+  end
+
+  defp strip_unsafe_body(model, %{body: nil}) do
+    model
+  end
+
+  defp strip_unsafe_body(model, %{body: body}) do
+    {:safe, clean_body} = Phoenix.HTML.html_escape(body)
+    model |> put_change(:body, clean_body)
+  end
+
+  defp strip_unsafe_body(model, _params) do
+    model
   end
 end

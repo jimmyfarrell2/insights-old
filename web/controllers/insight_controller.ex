@@ -56,14 +56,12 @@ defmodule Insights.InsightController do
   end
 
   def update(conn, %{"id" => id, "insight" => insight_params}) do
+    IO.inspect insight_params
     insight = Repo.get!(Insight, id)
     changeset = Insight.changeset(insight, insight_params)
 
     case Repo.update(changeset) do
-      {:ok, insight} ->
-        conn
-        |> put_flash(:info, "Insight updated successfully.")
-        |> redirect(to: insight_path(conn, :show, insight))
+      {:ok, insight} -> conn |> send_resp(200, "")
       {:error, changeset} ->
         render(conn, "edit.html", insight: insight, changeset: changeset)
     end

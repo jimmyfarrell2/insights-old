@@ -1,48 +1,6 @@
-<h2>Show insight</h2>
+<%= content_tag :h1, @insight.title %>
+<%= content_tag :p do %>
+  By <%= link @insight.author.username, to: user_path(@conn, :show, @insight.author.username), class: "" %>
+<% end %>
 
-<ul>
-
-  <li>
-    <strong>Author:</strong>
-    <%= @insight.author.username %>
-  </li>
-
-  <li>
-    <strong>Title:</strong>
-    <%= @insight.title %>
-  </li>
-
-  <li>
-    <strong>Body:</strong>
-    <%= @insight.body %>
-  </li>
-
-  <li>
-    <strong>Category:</strong>
-    <%= @insight.category %>
-  </li>
-
-  <li>
-    <strong>Tags:</strong>
-    <%= Enum.join(@insight.tags, " ") %>
-  </li>
-
-  <li>
-    <strong>Published:</strong>
-    <%= @insight.published_at %>
-  </li>
-
-  <li>
-    <strong>Created:</strong>
-    <%= @insight.inserted_at %>
-  </li>
-
-  <li>
-    <strong>Last Updated:</strong>
-    <%= @insight.updated_at %>
-  </li>
-
-</ul>
-
-<%= link "Edit", to: insight_path(@conn, :edit, @insight) %>
-<%= link "Back", to: insight_path(@conn, :index) %>
+<%= md_to_html(@insight.body) %>

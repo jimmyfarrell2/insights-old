@@ -1,0 +1,27 @@
+#insight_title {
+  font-size: 34px;
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+#insight-form .editor-toolbar {
+  opacity: .8;
+  border-bottom: 1px solid #bbb;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+#insight-form .CodeMirror {
+  border: none;
+}
+
+#insight-form .editor-preview table td, #insight-form .editor-preview table th {
+  border: none;
+  padding: none;
+}
+
+#insight-form .editor-preview pre {
+  background: none;
+}

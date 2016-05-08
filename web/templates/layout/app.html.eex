@@ -13,29 +13,26 @@
 
   <body>
     <div class="">
-      <header class="">
-        <nav role="">
-          <ul class="">
-              <li><a href="/">Home</a></li>
-            <%= if @current_user do %>
-              <li><a href="/users/<%= @current_user.username %>"><%= @current_user.username %></a></li>
-              <li><a href="/logout">Logout</a></li>
-            <%= else %>
-              <li><a href="/register">Register</a></li>
-              <li><a href="/login">Login</a></li>
-            <% end %>
-            <li><a href="/insights">Insights</a></li>
-            <li><a href="/users">Users</a></li>
-            <li><a href="/insights/new">New Insight</a></li>
-          </ul>
-        </nav>
-        <span class=""><h1>Insights</h1><h4>Knowledge. Insights. Passion.</h4></span>
-      </header>
+      <div class="pure-menu pure-menu-horizontal">
+        <ul class="pure-menu-list">
+            <li class="pure-menu-item"><a href="/" class="pure-menu-link">Home</a></li>
+          <%= if @current_user do %>
+            <li class="pure-menu-item"><a href="/users/<%= @current_user.username %>" class="pure-menu-link"><%= @current_user.username %></a></li>
+            <li class="pure-menu-item"><a href="/logout" class="pure-menu-link">Logout</a></li>
+          <%= else %>
+            <li class="pure-menu-item"><a href="/register" class="pure-menu-link">Register</a></li>
+            <li class="pure-menu-item"><a href="/login" class="pure-menu-link">Login</a></li>
+          <% end %>
+          <li class="pure-menu-item"><a href="/insights" class="pure-menu-link">Insights</a></li>
+          <li class="pure-menu-item"><a href="/users" class="pure-menu-link">Users</a></li>
+          <li class="pure-menu-item"><a href="/insights/new" class="pure-menu-link">New Insight</a></li>
+        </ul>
+      </div>
 
       <p class="" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="" role="alert"><%= get_flash(@conn, :error) %></p>
 
-      <main role="">
+      <main role="main" class="">
         <%= render @view_module, @view_template, assigns %>
       </main>
 
