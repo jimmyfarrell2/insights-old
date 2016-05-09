@@ -1,6 +1,8 @@
 defmodule Insights.UserController do
   use Insights.Web, :controller
+
   import Ecto.Query
+
   alias Insights.User
 
   plug :scrub_params, "user" when action in [:create, :update]

@@ -29,10 +29,12 @@ defmodule Insights.Router do
     post "/reset-password", PasswordController, :reset_password
 
     resources "/users", UserController, param: "username", except: [:new] do
-      resources "/insights", InsightController, param: "username", only: [:index]
+      resources "/insights", InsightController do
+        resources "/versions", VersionController, only: [:index, :show, :delete]
+      end
     end
 
-    resources "/insights", InsightController
+    resources "/insights", InsightController, only: [:index]
   end
 
   # Other scopes may use custom stacks.

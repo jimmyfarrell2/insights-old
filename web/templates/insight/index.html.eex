@@ -16,13 +16,15 @@
       <td><%= insight.title %></td>
 
       <td class="">
-        <%= link "Show", to: insight_path(@conn, :show, insight), class: "" %>
-        <%= link "Edit", to: insight_path(@conn, :edit, insight), class: "" %>
-        <%= link "Delete", to: insight_path(@conn, :delete, insight), method: :delete, data: [confirm: "Are you sure?"], class: "" %>
+        <%= link "Show", to: user_insight_path(@conn, :show, insight.author.username, insight), class: "" %>
+        <%= if @current_user && @current_user.id == insight.author.id do %>
+          <%= link "Edit", to: user_insight_path(@conn, :edit, @current_user.username, insight), class: "" %>
+          <%= link "Delete", to: user_insight_path(@conn, :delete, @current_user.username, insight), method: :delete, data: [confirm: "Are you sure?"], class: "" %>
+        <% end %>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
 
-<%= link "New insight", to: insight_path(@conn, :new) %>
+<%= link "New insight", to: user_insight_path(@conn, :new, @current_user.username) %>

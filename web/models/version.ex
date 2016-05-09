@@ -1,23 +1,19 @@
-defmodule Insights.Insight do
+defmodule Insights.Version do
   use Insights.Web, :model
 
   @primary_key {:id, Ecto.UUID, autogenerate: true}
   @foreign_key_type Ecto.UUID
 
-  schema "insights" do
-    field :title, :string
+  schema "versions" do
     field :body, :string
-    field :category, :string
-    field :tags, {:array, :string}
-    field :published_at, Timex.Ecto.DateTime
-    belongs_to :author, Insights.User
-    has_many :versions, Insights.Version
+    field :created_at, Timex.Ecto.DateTime
+    belongs_to :insight, Insights.Insight
 
     timestamps
   end
 
-  @required_fields ~w(author_id title)
-  @optional_fields ~w(body category tags published_at)
+  @required_fields ~w(insight_id created_at)
+  @optional_fields ~w(body)
 
   @doc """
   Creates a changeset based on the `model` and `params`.

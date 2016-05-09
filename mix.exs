@@ -19,7 +19,7 @@ defmodule Insights.Mixfile do
   def application do
     [mod: {Insights, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex]]
+                    :phoenix_ecto, :postgrex, :timex, :timex_ecto]]
   end
 
   # Specifies which paths to compile per environment.
@@ -31,6 +31,7 @@ defmodule Insights.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [{:cowboy, "~> 1.0"},
+     {:diff, "~> 1.0"},
      {:earmark, "~> 0.2.1"},
      {:gettext, "~> 0.9"},
      {:passport, "~> 0.0.4"},
@@ -38,7 +39,9 @@ defmodule Insights.Mixfile do
      {:phoenix_ecto, "~> 2.0"},
      {:phoenix_html, "~> 2.4"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
-     {:postgrex, ">= 0.0.0"}]
+     {:postgrex, ">= 0.0.0"},
+     {:timex, "~> 2.1.4"},
+     {:timex_ecto, "~> 1.0.4"}]
   end
 
   # Aliases are shortcut or tasks specific to the current project.

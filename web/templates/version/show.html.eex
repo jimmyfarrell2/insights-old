@@ -1,0 +1,10 @@
+<%= content_tag :h1, @insight.title %>
+<%= content_tag :p do %>
+  By <%= link @insight.author.username, to: user_path(@conn, :show, @insight.author.username), class: "" %>
+<% end %>
+
+<%= form_tag @action, method: "put" do %>
+  <%= hidden_input :version, :id, [value: @version.id] %>
+  <%= content_tag :button, "Restore This Version", data: [confirm: "Are you sure?"], class: "" %>
+<%= end %>
+<%= raw cleanup_diff(@diff) %>

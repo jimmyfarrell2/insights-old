@@ -1,0 +1,8 @@
+<%= content_tag :h1, "Version History for #{@insight.title}" %>
+<%= content_tag :ul do %>
+  <%= for version <- @insight.versions do %>
+    <%= content_tag :li do %>
+      <%= link format_date(version.inserted_at), to: user_insight_version_path(@conn, :show, @author.username, @insight, version), class: "" %>
+    <% end %>
+  <% end %>
+<% end %>

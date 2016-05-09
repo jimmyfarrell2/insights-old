@@ -25,7 +25,6 @@
           <% end %>
           <li class="pure-menu-item"><a href="/insights" class="pure-menu-link">Insights</a></li>
           <li class="pure-menu-item"><a href="/users" class="pure-menu-link">Users</a></li>
-          <li class="pure-menu-item"><a href="/insights/new" class="pure-menu-link">New Insight</a></li>
         </ul>
       </div>
 

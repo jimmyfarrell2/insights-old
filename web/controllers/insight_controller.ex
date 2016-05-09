@@ -1,10 +1,13 @@
 defmodule Insights.InsightController do
   use Insights.Web, :controller
+
   import Ecto.Query
+
   alias Insights.Insight
   alias Insights.User
+  alias Insights.Version
 
-  plug :scrub_params, "insight" when action in [:create, :update]
+  #plug :scrub_params, "insight" when action in [:create, :update]
   plug :verify_authorization, "verify authorization" when action in [:new]
 
   def index(conn, %{"user_username" => username}) do
@@ -35,10 +38,10 @@ defmodule Insights.InsightController do
     changeset = Insight.changeset(%Insight{}, insight_params)
 
     case Repo.insert(changeset) do
-      {:ok, _insight} ->
+      {:ok, insight} ->
         conn
         |> put_flash(:info, "Insight created successfully.")
-        |> redirect(to: insight_path(conn, :index))
+        |> redirect(to: user_insight_path(conn, :edit, username, insight))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset, categories: categories)
     end
@@ -55,28 +58,46 @@ defmodule Insights.InsightController do
     render(conn, "edit.html", insight: insight, changeset: changeset, categories: categories)
   end
 
-  def update(conn, %{"id" => id, "insight" => insight_params}) do
-    IO.inspect insight_params
+  def update(conn, %{"id" => id, "version" => %{"id" => version_id}}) do
+    %{assigns: %{current_user: %{username: username}}} = conn
     insight = Repo.get!(Insight, id)
-    changeset = Insight.changeset(insight, insight_params)
-
+    version = Repo.get(Version, version_id)
+    changeset = Insight.changeset(insight, %{body: version.body})
+    insert_version(insight)
     case Repo.update(changeset) do
-      {:ok, insight} -> conn |> send_resp(200, "")
-      {:error, changeset} ->
-        render(conn, "edit.html", insight: insight, changeset: changeset)
+      {:ok, _insight} ->
+        conn
+        |> put_flash(:info, "Previous version restored.")
+        |> redirect(to: user_insight_path(conn, :edit, username, insight))
+      {:error, _changeset} ->
+        conn
+        |> put_flash(:info, "There was a problem restoring version.")
+        |> redirect(to: user_insight_version_path(conn, :edit, username, insight, version))
+    end
+  end
+
+  def update(conn, %{"id" => id, "insight" => insight_params}) do
+    insight = Repo.get!(Insight, id)
+    %{"body" => new_body} = insight_params
+    unless insight.body == new_body, do: insert_version(insight)
+    changeset = Insight.changeset(insight, insight_params)
+    case Repo.update(changeset) do
+      {:ok, _insight} -> conn |> send_resp(200, "")
+      {:error, _changeset} -> conn |> send_resp(500, "")
     end
   end
 
   def delete(conn, %{"id" => id}) do
     insight = Repo.get!(Insight, id)
-
-    # Here we use delete! (with a bang) because we expect
-    # it to always work (and if it does not, it will raise).
     Repo.delete!(insight)
-
     conn
     |> put_flash(:info, "Insight deleted successfully.")
     |> redirect(to: insight_path(conn, :index))
+  end
+
+  defp insert_version(insight) do
+    changeset = Version.changeset(%Version{}, %{insight_id: insight.id, body: insight.body, created_at: insight.updated_at})
+    Repo.insert(changeset)
   end
 
   defp categories do

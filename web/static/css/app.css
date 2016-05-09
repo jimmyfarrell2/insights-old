@@ -9,3 +9,15 @@ body {
 .hidden {
   display: none !important;
 }
+
+.diff-html-added {
+  background: #dbffdb;
+}
+
+.diff-html-removed {
+  background: #ffdddd;
+}
+
+.diff-html-changed {
+  background: #ffff99;
+}

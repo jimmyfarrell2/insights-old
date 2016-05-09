@@ -1,2 +1,2 @@
 <%= render "form.html", changeset: @changeset, categories: @categories,
-                        action: insight_path(@conn, :update, @insight) %>
+                        action: user_insight_path(@conn, :update, @current_user.username, @insight) %>
