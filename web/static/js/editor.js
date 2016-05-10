@@ -1,9 +1,9 @@
 (() => {
   let textarea = document.getElementById('insight_body');
   if (textarea) {
-  let $textarea = $(textarea);
-  let text = $textarea.val().replace(/&lt;/g, '<').replace(/&gt;/g, '>');
-  $textarea.val(text)
+    let $textarea = $(textarea);
+    let text = $textarea.val().replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+    $textarea.val(text)
 
     let editorOptions = {
       element: textarea,
