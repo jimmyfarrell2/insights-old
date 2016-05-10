@@ -5,6 +5,6 @@
 
 <%= form_tag @action, method: "put" do %>
   <%= hidden_input :version, :id, [value: @version.id] %>
-  <%= content_tag :button, "Restore This Version", data: [confirm: "Are you sure?"], class: "" %>
+  <%= content_tag :button, "Restore This Version", class: "" %>
 <%= end %>
 <%= raw cleanup_diff(@diff) %>

@@ -1,2 +1,3 @@
+<%= link "Version History", to: user_insight_version_path(@conn, :index, @current_user.username, @insight) %>
 <%= render "form.html", changeset: @changeset, categories: @categories,
                         action: user_insight_path(@conn, :update, @current_user.username, @insight) %>
