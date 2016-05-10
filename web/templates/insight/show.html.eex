@@ -3,4 +3,6 @@
   By <%= link @insight.author.username, to: user_path(@conn, :show, @insight.author.username), class: "" %>
 <% end %>
 
-<%= md_to_html(@insight.body) %>
+<%= content_tag :div, class: "insight-body hidden" do %>
+  <%= md_to_html(@insight.body) %>
+<% end %>

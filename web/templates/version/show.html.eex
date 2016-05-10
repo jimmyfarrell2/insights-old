@@ -6,5 +6,8 @@
 <%= form_tag @action, method: "put" do %>
   <%= hidden_input :version, :id, [value: @version.id] %>
   <%= content_tag :button, "Restore This Version", class: "" %>
-<%= end %>
-<%= raw cleanup_diff(@diff) %>
+<% end %>
+
+<%= content_tag :div, class: "insight-body hidden" do %>
+  <%= raw cleanup_diff(@diff) %>
+<% end %>
