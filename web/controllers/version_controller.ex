@@ -39,7 +39,7 @@ defmodule Insights.VersionController do
 
   defp create_filepaths(dir_path) do
     timestamp = :calendar.local_time |> :calendar.datetime_to_gregorian_seconds
-    unless File.exists?(dir_path), do: File.mkdir(dir_path)
+    unless File.exists?(dir_path), do: File.mkdir_p(dir_path)
     Enum.reduce(["curr", "ver", "diff"], %{}, fn(val, acc) ->
       Map.put(acc, val, Path.join(dir_path, "#{timestamp}-#{val}.html"))
     end)
