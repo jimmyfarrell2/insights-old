@@ -25,3 +25,11 @@
 #insight-form .editor-preview pre {
   background: none;
 }
+
+#insight-form .CodeMirror .CodeMirror-code .cm-tag {
+  color: inherit;
+}
+
+.insight-body pre, .insight-body code, #insight-form .editor-preview pre, #insight-form .editor-preview code {
+  background: #e5e5e5;
+}
